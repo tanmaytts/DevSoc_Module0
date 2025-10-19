@@ -18,7 +18,7 @@
 int main(int argc, char *argv[]) {
     // 1. Check for correct number of arguments.
     // The program name is argv[0], so we expect one more argument (the filename).
-    if (argc != 2) {
+    if (argc > 3) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
         return 1; // Return an error code.
     }
@@ -44,7 +44,18 @@ int main(int argc, char *argv[]) {
         perror("Error closing file");
         return 1;
     }
-
+    char arg2 = argv[2];
+    if(arg2 != 'a'){
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        return 1; // Return an error code.
+    }
+    else{
+        if (utime(filepath, NULL) == 0) {
+        printf("Access time updated to current time.\n");
+    } else {
+        perror("utime");
+    }
+    }   
     
 
 
